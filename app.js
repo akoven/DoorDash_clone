@@ -4,10 +4,13 @@ const mongoose = require('mongoose');
 const users = require('./routes/api/users');
 const tweets = require('./routes/api/tweets');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+require('./config/passport')(passport);
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
-app.get('/',(req,res) => res.send('Goodbye!'));
+// app.use('/',(req,res) => res.send('Goodbye!'));
+app.use(passport.initialize());
 app.use('/api/users', users);
 app.use('/api/tweets', tweets);
 
